@@ -35,8 +35,9 @@ controls = d$FilterID %in% Control_strings
 if(!Keep_controls) d = d[!controls, ]
 
 # order Techreps
-d = d[order(d$FilterID), ]
-d$TechRep = sequence(rle(d$FilterID)$lengths)
+d = d[order(d$FilterID, d$Target), ]
+var = paste(d$FilterID, d$Target)
+d$TechRep = sequence(rle(var)$lengths)
 
 # make Experiment column
 d$Experiment = Experiment

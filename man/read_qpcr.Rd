@@ -11,7 +11,7 @@ read_qpcr(
   Keep_controls = FALSE,
   Column_numbers = c(2, 4, 5, 9),
   Column_names = c("WellPosition", "FilterID", "Target", "Cq"),
-  Control_strings = c("NTC", "CT+", "0", "BHOO", "DS", "BHOO+", "DS+")
+  Control_strings = c("NTC", "CT+", "^0$", "BHOO", "DS", "BHOO+", "DS+")
 )
 }
 \arguments{

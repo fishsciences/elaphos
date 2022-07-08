@@ -1,7 +1,7 @@
 Package: elaphos
 Type: Package
 Title: Data Package For CFS E-DNA Experiments
-Version: 0.1.2
+Version: 0.1.3
 Author: Myfanwy Johnston, Matt Espe
 Maintainer: Myfanwy Johnston <myfanwy.johnston@fishsciences.net>
 Description: Data and convenience functions for eDNA experiments and sampling conducted

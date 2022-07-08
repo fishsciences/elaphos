@@ -20,7 +20,7 @@ read_qpcr = function(File,
                      Keep_controls = FALSE,
                      Column_numbers = c(2, 4, 5, 9),
                      Column_names = c("WellPosition", "FilterID", "Target", "Cq"),
-                     Control_strings = c("NTC", "CT+", "0", "BHOO", "DS", "BHOO+", "DS+")) {
+                     Control_strings = c("NTC", "CT+", "^0$", "BHOO", "DS", "BHOO+", "DS+")) {
 
 d = as.data.frame(read_excel(path = path.expand(File),
                                      sheet = "Results",
@@ -34,8 +34,11 @@ d$Cq[d$Cq == "Undetermined"] <- Cq_threshold
 d$Cq = as.numeric(d$Cq)
 
 # identify controls
-controls = d$FilterID %in% Control_strings
-if(!Keep_controls) d = d[!controls, ]
+    d$Control = as.integer(grepl(paste(Control_strings, collapse = "|"),
+                                 d$FilterID,
+                                 ignore.case = TRUE))
+    
+if(!Keep_controls) d = d[!d$Control, ]
 
 # order Techreps
 d = d[order(d$FilterID, d$Target), ]
@@ -45,9 +48,8 @@ d$TechRep = sequence(rle(var)$lengths)
 # make Experiment column
 d$Experiment = Experiment
 # make PlateID columns from filename
-d$PlateID = paste(basename(File))
-d$Control = ifelse(d$FilterID %in% Control_strings, 1, 0)
-
+    d$PlateID = paste(basename(File))
+    
 as.data.frame(d[ , c("Experiment", "TechRep",  "PlateID",  "Control", Column_names)])
 
 }

@@ -2,12 +2,15 @@
 #'
 #' @description this takes a single .xls file as its input.  It returns a dataframe.
 #'
-#' @param file the path to the .xls file
+#' @param File the path to the .xls file
 #' @param Cq_threshold the Cq value at which to assume non-detection
 #' @param Experiment the name of the experiment or project associated with the qpcr data
-#' @return a dataframe with the following columns: "Experiment", "FilterID", "TechRep", "Target", "Cq", "TechRepID", "PlateID", "WellID"
+#' @param Keep_controls logical indicating whether you want to retain the FilterIDs with matching strings provided in the \code{Control_strings} argument
+#' @param Column_numbers integer vector corresponding to the columns you want to keep from the raw qpcr output
+#' @param Column_names character vector of column names to apply to the \code{Column_numbers}
+#' @param Control_strings character vector of strings to check for in the FilterID column that indicate a control sample
+#' @return a data frame with the following columns: "Experiment", "TechRep", "PlateID", "Control", and those specified in Column_names.
 #'
-#' @importFrom readxl read_excel
 #' @export
 
 # arguments: file, cq threshold, experiment
@@ -45,7 +48,6 @@ d$Experiment = Experiment
 d$PlateID = paste(basename(File))
 d$Control = ifelse(d$FilterID %in% Control_strings, 1, 0)
 
-d = as.data.frame(d[ , c("Experiment", "TechRep",  "PlateID",  "Control", Column_names)])
-return(d)
+as.data.frame(d[ , c("Experiment", "TechRep",  "PlateID",  "Control", Column_names)])
 
 }

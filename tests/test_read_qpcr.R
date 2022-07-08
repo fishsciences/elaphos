@@ -1,4 +1,4 @@
-
+library(elaphos)
 
 fpath = system.file("test_qpcr_data/", package = "elaphos")
 
@@ -20,7 +20,3 @@ wconts = do.call(rbind, wconts)
 
 # should be some controls
 stopifnot(!sum(wconts$Control) == 0)
-
-length(cqs$FilterID)
-table(cqs$FilterID, cqs$Target)
-table(cqs$Target, cqs$TechRep)

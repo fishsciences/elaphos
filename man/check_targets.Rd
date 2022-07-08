@@ -11,9 +11,9 @@ check_targets(
 )
 }
 \arguments{
-\item{row}{named vector or row of a data frame}
+\item{dataframe}{data frame object to check}
 
-\item{new_row}{default is to unlist `row`}
+\item{cols}{specific columns in the \code{dataframe} to check}
 }
 \value{
 a logical vector

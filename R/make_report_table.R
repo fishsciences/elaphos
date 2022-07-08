@@ -1,4 +1,4 @@
-# Making report data table
+# Making a report data table
 
 ##' Creates a detection data.frame from CQ results, suitable for summary reports. 
 ##'
@@ -27,6 +27,6 @@ make_detection_table = function(df,
         factor(as.integer(x), levels = c(0,1), labels = labs))
     ans[[filter_col]] = rownames(tmp)
 
-    ans = as.data.frame(ans[c(filter_col, unique(d2$Target))])
+    ans = as.data.frame(ans[c(filter_col, unique(df$Target))])
     return(ans)
 }

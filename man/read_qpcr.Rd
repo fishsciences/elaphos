@@ -15,14 +15,22 @@ read_qpcr(
 )
 }
 \arguments{
+\item{File}{the path to the .xls file}
+
 \item{Cq_threshold}{the Cq value at which to assume non-detection}
 
 \item{Experiment}{the name of the experiment or project associated with the qpcr data}
 
-\item{file}{the path to the .xls file}
+\item{Keep_controls}{logical indicating whether you want to retain the FilterIDs with matching strings provided in the \code{Control_strings} argument}
+
+\item{Column_numbers}{integer vector corresponding to the columns you want to keep from the raw qpcr output}
+
+\item{Column_names}{character vector of column names to apply to the \code{Column_numbers}}
+
+\item{Control_strings}{character vector of strings to check for in the FilterID column that indicate a control sample}
 }
 \value{
-a dataframe with the following columns: "Experiment", "FilterID", "TechRep", "Target", "Cq", "TechRepID", "PlateID", "WellID"
+a data frame with the following columns: "Experiment", "TechRep", "PlateID", "Control", and those specified in Column_names.
 }
 \description{
 this takes a single .xls file as its input.  It returns a dataframe.

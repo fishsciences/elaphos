@@ -1,4 +1,7 @@
 # test compare_cols
+library(elaphos)
+library(stats)
+
 d = structure(
   list(
     lut_Species_MitoFish = c(
@@ -61,5 +64,5 @@ stopifnot(!(elaphos:::check_row(test)))
 test = d[5, ] # should return TRUE
 stopifnot(elaphos:::check_row(test))
 
-d$target_agreement = elaphos::check_targets(d)
+d$target_agreement = check_targets(d)
 stopifnot(sum(d$target_agreement) == 12)
